@@ -1,0 +1,116 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "opencode",
+  "autoupdate": true,
+  "plugin": [
+    "oh-my-opencode@latest"
+  ],
+  "instructions": [
+    "~/.dotfiles/MYAGENTS.md",
+    "./docs/**/*"
+  ],
+  "formatter": {
+    "rubocop": {
+      "command": [
+        "bundle",
+        "exec",
+        "rubocop",
+        "-A",
+        "$FILE"
+      ],
+      "extensions": [
+        ".rb",
+        ".rake"
+      ]
+    },
+    "erb-formatter": {
+      "command": [
+        "bundle",
+        "exec",
+        "erb-formatter",
+        "$FILE",
+        "--write"
+      ],
+      "extensions": [
+        ".html.erb"
+      ]
+    },
+    "eslint": {
+      "command": [
+        "yarn",
+        "run",
+        "lint-javascript",
+        "--fix",
+        "$FILE",
+        "--ignore-pattern",
+        "app/assets/builds"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    "stylelint": {
+      "command": [
+        "yarn",
+        "run",
+        "lint-scss",
+        "--fix",
+        "$FILE"
+      ],
+      "extensions": [
+        ".scss"
+      ]
+    }
+  },
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      "tmp/**",
+      ".git/**",
+      "public/assets/**",
+      "public/packs/**",
+      "vendor/bundle/**",
+      "coverage/**",
+      "log/**",
+      "app/assets/builds/**",
+      "spec/cassettes/**"
+    ]
+  },
+ "lsp": {
+    "ruby-lsp": {
+      "disabled": true
+    },
+    "solargraph": {
+      "command": ["solargraph", "stdio"],
+      "extensions": [".rb", ".rake", ".gemspec", ".ru"]
+    }
+  },
+  "snapshot": true,
+  "mcp": {
+    "rails": {
+      "type": "local",
+      "command": ["npx", "-y", "mcp-remote", "https://dev.frame.work:3000/tidewave/mcp"],
+      "environment": {
+        "NODE_EXTRA_CA_CERTS": "config/certs/rootCA.pem"
+      },
+      "enabled": true
+    },
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "enabled": true
+    },
+    "jira": {
+      "type": "remote",
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "oauth": {},
+      "enabled": true
+    }
+  },
+  "experimental": {
+    "lsp_diagnostics_timeout_ms": 30000
+  }
+}

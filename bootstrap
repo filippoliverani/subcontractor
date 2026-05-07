@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+SUBCONTRACTOR_PATH="$HOME/.subcontractor"
+
+if [ -e $SUBCONTRACTOR_PATH/.git ]; then
+  cd $SUBCONTRACTOR_PATH && git pull
+else
+  git clone https://github.com/filippoliverani/subcontractor.git $path
+fi
+
+brew install anomalyco/tap/opencode
+
+ln -sf $SUBCONTRACTOR_PATH/opencode ~/.config/opencode
+
+(cd ~/.config/opencode && npm install oh-my-openagent)
