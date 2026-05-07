@@ -7,7 +7,7 @@
     "oh-my-openagent@latest"
   ],
   "instructions": [
-    "~/.dotfiles/MYAGENTS.md",
+    "~/.subcontractor/AGENTS.md",
     "./docs/**/*"
   ],
   "formatter": {
