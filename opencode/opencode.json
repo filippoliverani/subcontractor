@@ -4,12 +4,25 @@
   "small_model": "github-copilot/claude-sonnet-4.6",
   "autoupdate": true,
   "plugin": [
-    "oh-my-openagent@latest"
+    "oh-my-openagent@latest",
+    "openslimedit@latest",
+    "opencode-pty@latest"
   ],
   "instructions": [
     "~/.subcontractor/AGENTS.md",
     "./docs/**/*"
   ],
+  "agent": {
+    "title": {
+      "model": "github-copilot/gpt-5-mini"
+    },
+    "summary": {
+      "model": "github-copilot/gpt-5-mini"
+    },
+    "compaction": {
+      "model": "github-copilot/gpt-5-mini"
+    }
+  },
   "formatter": {
     "rubocop": {
       "command": [
@@ -180,6 +193,14 @@
       "type": "remote",
       "url": "https://mcp.cloudflare.com/mcp",
       "oauth": {},
+      "enabled": true
+    },
+    "heroku": {
+      "type": "remote",
+      "url": "https://mcp.heroku.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:HEROKU_API_KEY}"
+      },
       "enabled": true
     }
   },
