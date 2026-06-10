@@ -1,20 +1,41 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "github-copilot/claude-opus-4.6",
-  "small_model": "github-copilot/claude-sonnet-4.6",
+  "model": "github-copilot/claude-sonnet-4.6",
+  "small_model": "github-copilot/gpt-5.4-nano",
   "autoupdate": true,
+  "enabled_providers": [
+    "github-copilot"
+  ],
   "plugin": [
-    "oh-my-openagent@latest",
-    "openslimedit@latest",
-    "opencode-pty@latest"
+    "envsitter-guard@latest",
+    "opencode-background-agents@latest",
+    "opencode-handoff@latest",
+    "opencode-pty@latest",
+    "opencode-websearch@latest",
+    "openslimedit@latest"
   ],
   "instructions": [
     "~/.subcontractor/AGENTS.md",
     "./docs/**/*"
   ],
   "agent": {
-    "title": {
+    "plan": {
+      "model": "github-copilot/claude-opus-4.8",
+    },
+    "build": {
+      "model": "github-copilot/claude-sonnet-4.6",
+    },
+    "general": {
+      "model": "github-copilot/claude-haiku-4.5",
+    },
+    "explore": {
       "model": "github-copilot/gpt-5-mini"
+    },
+    "scout": {
+      "model": "github-copilot/gpt-5-mini"
+    },
+    "title": {
+      "model": "github-copilot/gpt-5.4-nano"
     },
     "summary": {
       "model": "github-copilot/gpt-5-mini"
@@ -91,6 +112,11 @@
     ]
   },
   "permission": {
+    "external_directory": {
+      "~/.subcontractor/**": "allow",
+      "/opt/homebrew/lib/ruby/gems/**" : "allow",
+      "*": "ask"
+    },
     "bash": {
       "*": "ask",
       "sudo *": "deny",
@@ -138,24 +164,25 @@
         "stdio"
       ],
       "extensions": [
-        ".erb.html"
-      ]
-    },
-    "solargraph": {
-      "command": [
-        "solargraph",
-        "stdio"
-      ],
-      "extensions": [
         ".rb",
         ".rake",
         ".gemspec",
-        ".ru"
+        ".ru",
+        ".html.erb"
       ]
-    }
+    },
   },
   "snapshot": true,
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "reserved": 10000
+  },
   "mcp": {
+    "context7": {
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp@latest"]
+    },
     "rails": {
       "type": "local",
       "command": [
@@ -167,7 +194,7 @@
       "environment": {
         "NODE_EXTRA_CA_CERTS": "config/certs/rootCA.pem"
       },
-      "enabled": true
+      "enabled": false
     },
     "github": {
       "type": "remote",
@@ -181,30 +208,27 @@
       "type": "remote",
       "url": "https://mcp.atlassian.com/v1/sse",
       "oauth": {},
-      "enabled": true
+      "enabled": false
     },
     "datadog": {
       "type": "remote",
       "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,apm",
       "oauth": {},
-      "enabled": true
+      "enabled": false
     },
     "cloudflare": {
       "type": "remote",
       "url": "https://mcp.cloudflare.com/mcp",
       "oauth": {},
-      "enabled": true
+      "enabled": false
     },
     "heroku": {
-      "type": "remote",
-      "url": "https://mcp.heroku.com/mcp",
-      "headers": {
-        "Authorization": "Bearer {env:HEROKU_API_KEY}"
+      "type": "local",
+      "command": ["npx", "-y", "@heroku/mcp-server"],
+      "environment": {
+        "HEROKU_API_KEY": "{env:HEROKU_API_KEY}"
       },
-      "enabled": true
+      "enabled": false
     }
-  },
-  "experimental": {
-    "lsp_diagnostics_timeout_ms": 30000
   }
 }
