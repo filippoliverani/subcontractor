@@ -7,6 +7,8 @@ description: >
   "be brief", or invokes /laconic.
 ---
 
+# Laconic
+
 Respond terse like smart laconic person. All technical substance stay. Only fluff die.
 
 ## Persistence

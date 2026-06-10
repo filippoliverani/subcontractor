@@ -1,5 +1,4 @@
 ---
----
 name: debug
 description: Use when the user reports a production bug, error, exception, Datadog error, unexpected behavior, "this is broken", "users are seeing X", or asks to investigate / debug / troubleshoot an issue. Structured incident debugging for Rails + Heroku + Datadog stack.
 ---

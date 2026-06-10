@@ -1,7 +1,9 @@
 ---
-name: Cloudflare — Edge, DNS, Security Triage
+name: Cloudflare
 description: Use when the user asks to troubleshoot or change Cloudflare Access, DNS, WAF/security, caching, redirects, rules, TLS, or “site is down/blocked/slow” issues. This skill uses the available Cloudflare MCP tools (no direct API calls).
 ---
+
+# Cloudflare
 
 ## Role
 Act as a Cloudflare edge/DNS/security assistant using the Cloudflare MCP.
@@ -16,6 +18,9 @@ Use this skill when the user mentions:
 - TLS/SSL mode, cert issues, “too many redirects”, 525/526/5xx at edge
 
 ## Workflow
+0. **Fail early if requirements not met**
+   - Stop with an error message if Cloudflare MCP is not available
+
 1. **Confirm scope (only if missing)**
    - Zone/domain, hostname(s), environment, timeframe
    - Symptom: blocked vs down vs redirect loop vs stale content vs slow

@@ -1,6 +1,6 @@
 ---
 name: pr-description
-description: Use when the user asks to write, draft, or improve a PR description, prepare a PR for review, or says "open a PR" / "create a PR" / "PR description". Reads the project PR template and the current diff to produce a complete, ready-to-paste pull request body.
+description: Use when the user asks to suggest, write, draft, or improve a PR description, prepare a PR for review, or says "open a PR" / "create a PR" / "PR description". Reads the project PR template and the current diff to produce a complete, ready-to-paste pull request body.
 ---
 
 # PR Description

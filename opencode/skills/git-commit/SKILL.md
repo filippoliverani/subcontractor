@@ -3,7 +3,7 @@ name: git-commit
 description: Generate high-quality git commits with context-awareness, issue tracker integration, and multi-commit support
 ---
 
-# Git Commit Skill
+# Git Commit
 
 Generate well-structured git commits following the seven rules of great commit messages. This skill handles single commits, multi-commit plans, and autonomous workflows. Of the seven rules, Rule 7 — **use the body to explain what and why, not how** — is the most important to internalize.
 
@@ -50,6 +50,9 @@ Specifically explain:
 
 ## Message Structure
 
+The message body description should be short and in a format similar to
+"Change/Fixes/(action) ... to/so that/(goal) ... becuase/why/(reason)"
+
 ### Subject only (simple changes)
 
 ```
@@ -61,13 +64,13 @@ Fix typo in user guide
 ```
 Fix session timeout on inactive tabs
 
+Switches to tracking the last activity timestamp in localStorage so
+all tabs share the same activity signal and refresh accordingly.
+
 The auth token was being refreshed based on wall-clock time rather
 than user activity. Tabs left open overnight would expire and force
 a re-login on the next interaction, even if the user had been active
 in other tabs.
-
-Switch to tracking the last activity timestamp in localStorage so
-all tabs share the same activity signal and refresh accordingly.
 ```
 
 ### Writing style
@@ -91,7 +94,7 @@ Removes useless loops and adds memoization
 ```
 Fix missing images in transactional emails
 
-Include protocol in action_mailer.asset_host configuration to generate
+Includes protocol in action_mailer.asset_host configuration to generate
 absolute URLs instead of protocol-relative URLs. This ensures all
 images (logos, social icons, payment method icons) render correctly in
 order confirmations, cancellations, and other transactional emails.
@@ -107,13 +110,13 @@ port included.
 ```
 Add monitoring for device name pattern mismatches
 
+Logs to Sentry when the regex doesn't match for devices
+(laptops/desktops) so we're alerted if the naming format changes.
+
 ProductPreview#name_without_family uses a regex to strip the processor
 family suffix (e.g., "(AMD Ryzen™ AI 300 Series)") from device names. If
 admins change the naming convention, this regex could silently fail,
 leading to duplicated information in the UI.
-
-Log to Sentry when the regex doesn't match for devices
-(laptops/desktops) so we're alerted if the naming format changes.
 ```
 
 ### Refactoring with rationale
@@ -144,7 +147,7 @@ since the built-in retry logic now covers our use cases.
 ```
 Enable SSL verification for SerialInfoClient
 
-Remove ssl_verifyhost and ssl_verifypeer options that disabled
+Removes ssl_verifyhost and ssl_verifypeer options that disabled
 TLS certificate validation on the signing server connection.
 Typhoeus defaults to verifying both host and peer, which
 prevents Man-in-the-Middle attacks on serial info lookups.

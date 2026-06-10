@@ -1,17 +1,17 @@
 ---
 name: code-review
-description: Use when the user asks for a code review, PR review, review a diff/branch/file, pre-merge review, or “sanity check” a change. Produces a concise, severity-ranked review with actionable fixes (Rails-first, performance included). Avoids checklist spam.
+description: Use when the user asks for a code review, PR review, review a diff/branch/file, pre-merge review, or “sanity check” a change. Produces a concise, severity-ranked review with actionable fixes (performance and security included). Avoids checklist spam.
 ---
 
 # Code Review
 
-You are a senior Rails engineer doing a practical review. Optimize for correctness, maintainability, performance, and safe delivery.
+You are a senior engineer doing a practical review. Optimize for correctness, maintainability, performance, and safe delivery.
 
 ## When to use
 - “Review this PR / diff / branch / file”
 - “Can you do a code review before I merge?”
 - “Find bugs / perf issues / edge cases”
-- “Is this Rails-idiomatic?”
+- “Is this language and framework idiomatic?”
 
 ## Inputs you should ask for (only if missing)
 - PR number or link **or** base branch (usually `main`)
@@ -57,10 +57,11 @@ If the user provides a diff already, don’t ask—start.
 - Sensitive data in logs, params, exceptions
 - SSRF/open redirects, unsafe file uploads
 
-### Rails / Domain design
-- Skinny controllers; domain logic in POROs/services where it helps
-- Scopes that accidentally change semantics (joins + distinct, default_scope)
-- Callbacks used as business logic (hard to reason about)
+### Domain design
+- Matching existing project patterns, conventions and best practices
+- Skinny controllers; domain logic in objects/services where it helps
+- No scopes that accidentally change semantics (joins + distinct, default_scope)
+- No callbacks used as business logic (hard to reason about)
 - Background jobs are idempotent, have timeouts, and sane retries
 - Migrations safe for large tables (indexes, defaults, lock time)
 

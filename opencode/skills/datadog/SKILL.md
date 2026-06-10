@@ -1,7 +1,9 @@
 ---
-name: Datadog — Observability Triage
+name: Datadog
 description: Use when the user asks to investigate Datadog logs, APM, metrics, traces, monitors, incidents, SLOs, latency, error spikes, or “what changed” in production. This skill uses the available Datadog MCP tools (no direct API calls).
 ---
+
+# Datadog
 
 ## Role
 Act as an on-call/observability assistant using the Datadog MCP.
@@ -14,6 +16,9 @@ Use this skill when the user mentions:
 - deploy regressions, “starting at time X”, “after release Y”
 
 ## Workflow
+0. **Fail early if requirements not met**
+   - Stop with an error message if Datadog MCP is not enabled
+
 1. **Confirm scope (only if missing)**
    - Service/app name, environment (prod/staging), timeframe, region
    - Symptom: errors vs latency vs traffic vs infra
