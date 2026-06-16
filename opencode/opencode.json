@@ -16,17 +16,17 @@
   ],
   "instructions": [
     "~/.subcontractor/AGENTS.md",
-    "./docs/**/*"
+    "./docs/coding_conventions/*.md"
   ],
   "agent": {
     "plan": {
-      "model": "github-copilot/claude-opus-4.8",
+      "model": "github-copilot/claude-opus-4.8"
     },
     "build": {
-      "model": "github-copilot/claude-sonnet-4.6",
+      "model": "github-copilot/claude-sonnet-4.6"
     },
     "general": {
-      "model": "github-copilot/claude-haiku-4.5",
+      "model": "github-copilot/claude-haiku-4.5"
     },
     "explore": {
       "model": "github-copilot/gpt-5-mini"
@@ -41,6 +41,12 @@
       "model": "github-copilot/gpt-5-mini"
     },
     "compaction": {
+      "model": "github-copilot/gpt-5-mini"
+    },
+    "review": {
+      "model": "github-copilot/claude-sonnet-4.6"
+    },
+    "write": {
       "model": "github-copilot/gpt-5-mini"
     }
   },
@@ -176,7 +182,7 @@
   "compaction": {
     "auto": true,
     "prune": true,
-    "reserved": 10000
+    "reserved": 5000
   },
   "mcp": {
     "context7": {
