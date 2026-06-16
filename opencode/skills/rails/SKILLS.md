@@ -1,5 +1,5 @@
 ---
-name: Rails
+name: rails
 description: >
 Conventions and workflow for working on Ruby on Rails projects. Use whenever editing, adding, or refactoring Ruby/Rails code, running tests, or linting. Triggers on any change to .rb files, RSpec specs, models, controllers, services, jobs, migrations, or when the user asks to test, lint, or follow project standards.
 ---

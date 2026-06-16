@@ -1,5 +1,5 @@
 ---
-name: Datadog
+name: datadog
 description: Use when the user asks to investigate Datadog logs, APM, metrics, traces, monitors, incidents, SLOs, latency, error spikes, or “what changed” in production. This skill uses the available Datadog MCP tools (no direct API calls).
 ---
 

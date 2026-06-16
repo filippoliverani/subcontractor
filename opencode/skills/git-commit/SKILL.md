@@ -1,13 +1,11 @@
 ---
 name: git-commit
-description: Generate high-quality git commits with context-awareness, issue tracker integration, and multi-commit support
+description: Generate high-quality git commits with context-awareness, and multi-commit support. Use when the user says "commit", "create commit", "amend commit", "write commit message"
 ---
 
 # Git Commit
 
 Generate well-structured git commits following the seven rules of great commit messages. This skill handles single commits, multi-commit plans, and autonomous workflows. Of the seven rules, Rule 7 — **use the body to explain what and why, not how** — is the most important to internalize.
-
-_Guidelines based on: <https://cbea.ms/git-commit/>_
 
 ## Commit Message Rules
 
@@ -21,9 +19,11 @@ Git tools (`log`, `shortlog`, `rebase`) depend on this separation. Simple change
 
 ### 3. Capitalize the subject line
 
-### 4. No period at the end of the subject line
+### 4. Do not include ticket numbers in the subject line
 
-### 5. Use the imperative mood in the subject line
+### 5. No period at the end of the subject line
+
+### 6. Use the imperative mood in the subject line
 
 The subject should complete: "If applied, this commit will **[your subject line]**"
 
@@ -33,11 +33,11 @@ The subject should complete: "If applied, this commit will **[your subject line]
 
 Imperative mood is required only in the subject. The body can be conversational.
 
-### 6. Wrap the body at 72 characters
+### 7. Wrap the body at 72 characters
 
 Git doesn't wrap automatically. 72 characters leaves room for indentation while staying under 80 columns.
 
-### 7. Use the body to explain what and why, not how
+### 8. Use the body to explain what and why, not how
 
 This is the most important rule. The diff shows WHAT changed and the code shows HOW. The commit message's job is to explain WHY.
 
@@ -169,8 +169,6 @@ Regardless of the scenario, follow these steps:
 
 Detect the base branch and fetch the latest state from the remote. Analyze the branch history (commits since divergence from base) to understand the overall narrative and how the new commit(s) fit in.
 
-If the branch name contains an issue tracker key, fetch issue details for additional context following the smart fetching rules in Context Awareness.
-
 **3. Plan the commits**
 
 For a single commit: draft the message directly.
@@ -179,7 +177,7 @@ For multiple commits: group changes into logical, atomic units. Each commit shou
 
 **4. Draft messages**
 
-Apply all seven rules from the Commit Message Rules section. Write in the style described in Writing Style. Use context from the branch history and issue tracker to inform the reasoning, but describe only what the specific commit does — not the entire branch.
+Apply all seven rules from the Commit Message Rules section. Write in the style described in Writing Style. Use context from the branch history to inform the reasoning, but describe only what the specific commit does — not the entire branch.
 
 If you cannot deduce the motivation with high confidence, ask the user (when present) rather than inventing reasoning. Good questions: What problem does this solve? Why was the previous approach insufficient? What's the business or user impact?
 

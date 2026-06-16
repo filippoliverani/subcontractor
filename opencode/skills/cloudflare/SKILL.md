@@ -1,5 +1,5 @@
 ---
-name: Cloudflare
+name: cloudflare
 description: Use when the user asks to troubleshoot or change Cloudflare Access, DNS, WAF/security, caching, redirects, rules, TLS, or “site is down/blocked/slow” issues. This skill uses the available Cloudflare MCP tools (no direct API calls).
 ---
 

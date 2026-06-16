@@ -1,5 +1,5 @@
 ---
-name: Heroku
+name: heroku
 description: Read and interpret Heroku app health through a Heroku MCP server. Use when the user asks about dyno throughput, dyno memory usage (RSS, R14/R15), request latency (p95/p99), Ruby/Rails runtime metrics, Sidekiq/worker health, scaling decisions, or incident triage on a Heroku app. Triggers on phrases like "is my app memory-bound", "what's the throughput", "should I scale up or out", "why is staging slow", "check dyno metrics", "R14", "H12".
 ---
 

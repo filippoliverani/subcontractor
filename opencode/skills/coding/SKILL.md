@@ -1,9 +1,9 @@
 ---
-name: Coding
+name: coding
 description: >
   Execute a planned code change safely and efficiently. Use when the user has an implementation plan,
   a change plan, diff spec, or step-by-step implementation guide and wants the
-  agent to apply it. Also triggers on: "execute this plan", "implement it", "implement this
+  agent to apply it. Also triggers on: "execute the plan", "implement it", "implement this
   change", "apply these changes", "run the plan", "ship it", "make the changes",
   "implement the refactor".
 ---

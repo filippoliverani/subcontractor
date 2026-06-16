@@ -1,5 +1,4 @@
 ---
-
 name: test-triage
 description: Use when the user shares a failing test, CI failure output, red spec, or asks to "fix this test" / "triage CI" / "why is this failing" / "flaky spec". Diagnoses test failures quickly and suggests minimal fixes.
 ---

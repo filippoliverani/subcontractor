@@ -1,5 +1,4 @@
 ---
-
 name: performance-review
 description: Use when the user asks for a performance review, perf audit, "is this slow?", "optimize this", "N+1", "query performance", "page is slow", "memory issues", or wants to review a change specifically for performance impact. Focused on Rails + Postgres + Heroku + Sidekiq stack.
 ---

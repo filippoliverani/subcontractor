@@ -1,5 +1,5 @@
  ---
-name: Planning
+name: planning
 description: >
   Plan safe, minimal code changes before implementation.
   Use when the user wants to plan a new feature, a refactor, review a proposed change for side effects, prepare a code modification strategy, break a large change into steps, or assess risk before editing code.
