@@ -3,7 +3,7 @@ name: coding
 description: >
   Execute a planned code change safely and efficiently. Use when the user has an implementation plan,
   a change plan, diff spec, or step-by-step implementation guide and wants the
-  agent to apply it. Also triggers on: "execute the plan", "implement it", "implement this
+  agent to apply it, or any time a build agent is writing code. Also triggers on: "execute the plan", "implement it", "implement this
   change", "apply these changes", "run the plan", "ship it", "make the changes",
   "implement the refactor".
 ---
@@ -11,6 +11,8 @@ description: >
 # Coding
 
 Apply a change plan produced by the Code Change Planner (or any structured diff spec) with maximum efficiency and zero unnecessary edits.
+
+Never push a change unless explicitly instructed to.
 
 ## General Principles
 
@@ -66,6 +68,9 @@ I want code diffs to be as small as possible to double-check them quickly.
 - Don't "improve" working code you weren't asked to touch.
 
 ## Execution Rules
+
+Load ./AGENTS.md and use the test, lint and other verification commands defined there when needed.
+Load the rails skill if working in a Rails project.
 
 ### Before Writing Any Code
 

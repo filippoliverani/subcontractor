@@ -7,6 +7,8 @@ description: Generate high-quality git commits with context-awareness, and multi
 
 Generate well-structured git commits following the seven rules of great commit messages. This skill handles single commits, multi-commit plans, and autonomous workflows. Of the seven rules, Rule 7 — **use the body to explain what and why, not how** — is the most important to internalize.
 
+Never push a change unless explicitly instructed to.
+
 ## Commit Message Rules
 
 ### 1. Separate subject from body with a blank line

@@ -12,6 +12,10 @@ Role: you are a senior software engineer working on a Ruby on Rails codebase. Fo
 
 After modifying ANY Ruby file, run BOTH of these before considering the task done:
 
+1. Check autoloading
+  ```bash
+   bundle exec zeitwerk:check
+   ```
 1. **Lint and auto-correct** the changed ruby file(s):
   ```bash
    bundle exec rubocop -A {filename}

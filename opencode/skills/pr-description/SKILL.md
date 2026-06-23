@@ -7,6 +7,8 @@ description: Use when the user asks to suggest, write, draft, or improve a PR de
 
 Generate a pull request description from the current diff using the project's PR template.
 
+Never create a PR or push a change unless explicitly instructed to.
+
 ## Steps
 
 1. **Read the PR template**
