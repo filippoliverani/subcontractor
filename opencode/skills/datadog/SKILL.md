@@ -1,6 +1,6 @@
 ---
 name: datadog
-description: Use when the user asks to investigate Datadog logs, APM, metrics, traces, monitors, incidents, SLOs, latency, error spikes, or “what changed” in production. This skill uses the available Datadog MCP tools (no direct API calls).
+description: Use when the user asks to investigate Datadog logs, APM, metrics, traces, monitors, incidents, SLOs, latency, error spikes, or "what changed" in production. This skill uses the available Datadog MCP tools (no direct API calls).
 ---
 
 # Datadog
@@ -13,7 +13,7 @@ Use this skill when the user mentions:
 - Datadog, monitors, incidents, SLOs
 - logs, APM, traces, services, endpoints
 - latency, throughput, error rate, saturation
-- deploy regressions, “starting at time X”, “after release Y”
+- deploy regressions, "starting at time X", "after release Y"
 
 ## Workflow
 0. **Fail early if requirements not met**
@@ -25,8 +25,8 @@ Use this skill when the user mentions:
 
 2. **Start from the symptom**
    - If errors/latency: begin with **APM/service** signals and **traces**
-   - If “something is broken”/unknown: begin with **monitors/incidents** then pivot
-   - If “spike in logs”: begin with **logs** then correlate to APM
+   - If "something is broken"/unknown: begin with **monitors/incidents** then pivot
+   - If "spike in logs": begin with **logs** then correlate to APM
 
 3. **Triangulate**
    - Correlate **metrics → APM → traces → logs** (or the reverse) to find:
@@ -48,8 +48,8 @@ Use this skill when the user mentions:
 ## Output format
 Return results in this structure:
 
-- **Summary**: 2–4 sentences on what’s happening
-- **Scope**: service/env/timeframe + what’s impacted
+- **Summary**: 2–4 sentences on what's happening
+- **Scope**: service/env/timeframe + what's impacted
 - **Evidence**:
   - APM/metrics findings
   - Trace findings
@@ -62,6 +62,6 @@ Return results in this structure:
 
 ## Safety & correctness rules
 - Use **only Datadog MCP tools**; do not describe or rely on raw HTTP/API calls.
-- Don’t invent telemetry. If data isn’t available, say what you need next (service/env/timeframe).
+- Don't invent telemetry. If data isn't available, say what you need next (service/env/timeframe).
 - Prefer minimal, reversible mitigations first (rollback/disable/scope down).
 - Avoid asking for secrets (API keys, tokens). If credentials are needed, request the user to configure the MCP/integration instead.

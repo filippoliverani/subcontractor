@@ -1,6 +1,6 @@
 ---
 name: cloudflare
-description: Use when the user asks to troubleshoot or change Cloudflare Access, DNS, WAF/security, caching, redirects, rules, TLS, or “site is down/blocked/slow” issues. This skill uses the available Cloudflare MCP tools (no direct API calls).
+description: Use when the user asks to troubleshoot or change Cloudflare Access, DNS, WAF/security, caching, redirects, rules, TLS, or "site is down/blocked/slow" issues. This skill uses the available Cloudflare MCP tools (no direct API calls).
 ---
 
 # Cloudflare
@@ -15,7 +15,7 @@ Use this skill when the user mentions:
 - WAF, firewall rules, bot protection, rate limiting, blocks/challenges
 - caching, cache rules, purge, performance regressions
 - redirects, page rules/rulesets, 301/302 loops
-- TLS/SSL mode, cert issues, “too many redirects”, 525/526/5xx at edge
+- TLS/SSL mode, cert issues, "too many redirects", 525/526/5xx at edge
 
 ## Workflow
 0. **Fail early if requirements not met**
@@ -48,7 +48,7 @@ Use this skill when the user mentions:
 ## Output format
 Return results in this structure:
 
-- **Summary**: what’s broken and where
+- **Summary**: what's broken and where
 - **Likely area**: Access / DNS / Security / Caching / Redirects (pick 1–2)
 - **Findings**: what you observed in current Cloudflare config
 - **Recommended change**: smallest safe change + exact scope (host/path/etc.)
@@ -57,6 +57,6 @@ Return results in this structure:
 
 ## Safety & correctness rules
 - Use **only Cloudflare MCP tools**; do not describe or rely on raw HTTP/API calls.
-- Don’t apply broad “disable security” fixes unless the user explicitly approves; prefer scoped exceptions.
-- Avoid leaking sensitive data (user identities, IP lists, tokens). Don’t request secrets.
+- Don't apply broad "disable security" fixes unless the user explicitly approves; prefer scoped exceptions.
+- Avoid leaking sensitive data (user identities, IP lists, tokens). Don't request secrets.
 - If uncertain, ask for: hostname, example URL, error code, and timeframe.

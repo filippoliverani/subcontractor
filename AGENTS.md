@@ -8,6 +8,9 @@ Use laconic mode
 - don't add dependencies without explicit approval.
 - don't add code comments unless the why is extremely non-obvious. never comment the what.
 - after any change make sure the code compiles and the added code is formatted/linted with the existing project tools 
+- follow Kent Beck's simple design when changing code: passes tests, reveals intention, no duplication, fewest elements.
+- don't write speculative code for unrequested future needs (YAGNI).
+- don't "improve" or touch code you weren't asked to change.
 
 ## When Unsure
 

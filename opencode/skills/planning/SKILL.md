@@ -1,4 +1,4 @@
- ---
+---
 name: planning
 description: >
   Plan safe, minimal code changes before implementation.
@@ -12,21 +12,41 @@ Produce a precise, unambiguous change plan that minimizes risk and maximizes the
 
 ## General Principles
 
-- read before writing. Understand the existing code style and patterns before planning changes.
-- plan the smallest change that solves the problem.
-- plan  the change easy with pre-factorimg and tidying up and then make the easy change.
-- don't reduce the degree of optionality without asking.
-- don't plan to refactor unrelated code in the same change.
-- consider what could break not just what should work.
-- when multiple approaches exist, briefly state the trade-offs and pick one. Don't silently choose.
-- match the abstraction level of surrounding code.
-- follow the conventions already established in the codebase. Search for similar solutions and replicate the style used there
+- Read before writing. Understand the existing code style and patterns before planning changes.
+- Plan the smallest change that solves the problem.
+- Make the change easy with pre-factoring and tidying up, then make the easy change.
+- Don't reduce the degree of optionality without asking.
+- Don't plan to refactor unrelated code in the same change.
+- Consider what could break, not just what should work.
+- When multiple approaches exist, briefly state the trade-offs and pick one. Don't silently choose.
+- Match the abstraction level of surrounding code.
+- Follow the conventions already established in the codebase. Search for similar solutions and replicate the style used there.
 
-Always apply Kent Beck's rules of simple design when planning code change
-1. Passes the tests
-2. Reveals intention
-3. No duplication
-4. Fewest elements
+## Command-Line Tooling
+
+Use modern, performant CLI tools for all code exploration during planning. They are faster, give better signal, and reduce noise. If a tool is missing, ask the user to install it (they can do so beforehand) rather than falling back silently to a slower legacy tool.
+
+| Task | Use | Instead of | Why |
+|------|-----|-----------|-----|
+| Search file contents | `rg` (ripgrep) | `grep`, `ack` | Faster, respects `.gitignore`, multiline, type filters |
+| Find files by name/path | `fd` | `find` | Simpler syntax, fast, gitignore-aware |
+| View a file | `bat` | `cat` | Syntax highlighting, line numbers, git gutter |
+| Structural / AST search | `ast-grep` (`sg`) | `rg` for code shape | Matches syntax, not text — precise for refactors |
+| Interactive filtering | `fzf` | manual scanning | Fuzzy-select files, symbols, call sites |
+| JSON inspection | `jq` | manual parsing | Query configs, lockfiles, API fixtures |
+| YAML/TOML inspection | `yq` | manual parsing | Query CI config, `.rubocop.yml`, manifests |
+| Directory overview | `eza --tree` or `lsd` | `ls -R` | Fast, readable tree with gitignore awareness |
+| Line/diff stats | `tokei`, `git diff --stat` | `wc -l` | Per-language LOC, blast-radius sizing |
+| Diff viewing | `delta` | `git diff` raw | Readable side-by-side, syntax-highlighted diffs |
+
+### Tooling conventions
+
+- Scope the blast radius with `rg` first; quantify it with `rg -l <pattern> | wc -l` or `tokei`.
+- Use `ast-grep` when the change is structural (rename a method, change a call signature, swap a pattern) — it won't match comments or strings by accident the way `rg` can.
+- Use `fd` to enumerate affected files by path/extension, then pipe into `bat`/`delta` for review.
+- Prefer `rg --type ruby` (and similar type filters) over manual glob lists.
+- Combine: `rg -l "OldClass" | fzf` to interactively confirm call sites before listing them in the plan.
+- Never run destructive commands during planning. Exploration tools are read-only by design — keep it that way.
 
 ## Performance Awareness
 
@@ -50,24 +70,23 @@ Always apply Kent Beck's rules of simple design when planning code change
 ## What NOT to Do
 
 - Don't introduce patterns that don't already exist without discussion.
-- Don't write speculative code for future requirements that haven't been asked for (YAGNI).
 
 ## Planning Workflow
 
 ### 1. Understand the Goal
 
 - Restate the change in one sentence: what changes, and why.
-- Identify the **invariant**: what must NOT change (public API, behavior, output format, test expectations).
+- Identify the invariant: what must NOT change (public API, behavior, output format, test expectations).
 
 ### 2. Map the Blast Radius
 
-List every file, class, method, and call site affected. Classify each as:
+Find every call site with `rg` (or `ast-grep` for structural matches), enumerate affected files with `fd`, and size the result with `tokei` or `rg -l <pattern> | wc -l`. List every file, class, method, and call site affected. Classify each as:
 
 | Tag | Meaning |
 |-----|---------|
-| **MODIFY** | Logic changes inside this unit |
-| **ADAPT** | Signature/type/import changes only — no logic change |
-| **VERIFY** | Not changed, but could break; needs test/review |
+| MODIFY | Logic changes inside this unit |
+| ADAPT | Signature/type/import changes only — no logic change |
+| VERIFY | Not changed, but could break; needs test/review |
 
 If blast radius > 5 files, split into sequential sub-plans (each independently shippable).
 
@@ -75,9 +94,9 @@ If blast radius > 5 files, split into sequential sub-plans (each independently s
 
 Order so the codebase compiles/passes tests at every intermediate step:
 
-1. **Add** new code (functions, classes, modules) — nothing calls it yet.
-2. **Migrate** callers to the new code, one at a time.
-3. **Remove** old code only after all callers are migrated.
+1. Add new code (functions, classes, modules) — nothing calls it yet.
+2. Migrate callers to the new code, one at a time.
+3. Remove old code only after all callers are migrated.
 4. Update tests last (or in lockstep with each caller migration).
 
 Never delete and rewrite simultaneously — always add → migrate → remove.
@@ -122,12 +141,12 @@ Before handing to the coding agent, confirm:
 
 ## Output Format
 
-```markdown
+```
 # Change Plan: <title>
 
-**Goal**: <one sentence>
-**Invariant**: <what must not change>
-**Blast radius**: <N files: list>
+Goal: <one sentence>
+Invariant: <what must not change>
+Blast radius: <N files: list>
 
 ## Sequence
 
@@ -150,9 +169,9 @@ Before handing to the coding agent, confirm:
 
 ## Principles
 
-- **Minimal diff**: change the fewest lines possible. If a refactor isn't needed for the goal, don't include it.
-- **No drive-by fixes**: resist the temptation to "clean up" unrelated code. Each plan has one goal.
-- **Byte-identical behavior**: unless the goal explicitly changes behavior, the output of every public method must be identical before and after for all inputs. Call out any edge case where this isn't guaranteed.
-- **Assume the coding agent is literal**: it will do exactly what the spec says. Ambiguity → bugs. Be precise about what to add, remove, and keep.
-- **Name the tests**: reference specific test files/cases that validate each change. If no test exists, flag it and include a test spec.
+- Minimal diff: change the fewest lines possible. If a refactor isn't needed for the goal, don't include it.
+- No drive-by fixes: resist the temptation to "clean up" unrelated code. Each plan has one goal.
+- Byte-identical behavior: unless the goal explicitly changes behavior, the output of every public method must be identical before and after for all inputs. Call out any edge case where this isn't guaranteed.
+- Assume the coding agent is literal: it will do exactly what the spec says. Ambiguity → bugs. Be precise about what to add, remove, and keep.
+- Name the tests: reference specific test files/cases that validate each change. If no test exists, flag it and include a test spec.
 

@@ -59,17 +59,13 @@ Don't introduce a pattern that doesn't exist in the codebase without discussing 
 - **No behavior changes.** If you spot a bug during refactoring, note it and fix it in a separate PR.
 - **No formatting changes** on code you're not refactoring. Keep diffs minimal.
 - **Run tests after every step:**
-```bash
+  ```bash
   bin/rspec spec/path/to/relevant_spec.rb
-
-bash
-bin/rake lint:fix
-   Run linting after every step:
-   ```bash
+  ```
+- **Run linting after every step:**
+  ```bash
    bin/rake lint:fix
    ```
-
-   Don't add dependencies without approval.
 
 ## Output format
 
@@ -82,7 +78,6 @@ bin/rake lint:fix
 1. <step> — <what changes, what stays>
 2. ...
 
-bin/rake lint
 #### Step 1
 <diff>
 
@@ -104,6 +99,4 @@ bin/rake lint
 
 - Don't rename files and change logic in the same commit.
 - Don't extract a class used in exactly one place (unless it's clearly a different responsibility).
-- Don't introduce abstractions for hypothetical future use (YAGNI).
-- Don't "improve" code you weren't asked to touch.
 - Don't rewrite, refactor. Small steps, always green.

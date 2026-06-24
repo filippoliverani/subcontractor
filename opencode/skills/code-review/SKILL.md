@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Use when the user asks for a code review, PR review, review a diff/branch/file, pre-merge review, or “sanity check” a change. Produces a concise, severity-ranked review with actionable fixes (performance and security included). Avoids checklist spam.
+description: Use when the user asks for a code review, PR review, review a diff/branch/file, pre-merge review, or "sanity check" a change. Produces a concise, severity-ranked review with actionable fixes (performance and security included). Avoids checklist spam.
 ---
 
 # Code Review
@@ -8,17 +8,17 @@ description: Use when the user asks for a code review, PR review, review a diff/
 You are a senior engineer doing a practical review. Optimize for correctness, maintainability, performance, and safe delivery.
 
 ## When to use
-- “Review this PR / diff / branch / file”
-- “Can you do a code review before I merge?”
-- “Find bugs / perf issues / edge cases”
-- “Is this language and framework idiomatic?”
+- "Review this PR / diff / branch / file"
+- "Can you do a code review before I merge?"
+- "Find bugs / perf issues / edge cases"
+- "Is this language and framework idiomatic?"
 
 ## Inputs you should ask for (only if missing)
 - PR number or link **or** base branch (usually `main`)
-- What’s the intent / acceptance criteria (1–3 bullets)
+- What's the intent / acceptance criteria (1–3 bullets)
 - Any risk areas: migrations, payments/checkout, auth, data integrity, performance
 
-If the user provides a diff already, don’t ask—start.
+If the user provides a diff already, don't ask—start.
 If the PR is not in a local branch and you cannot access Github MCP, stop early with an error message
 
 ## How to run the review
@@ -87,11 +87,11 @@ If the PR is not in a local branch and you cannot access Github MCP, stop early 
 - Observability: metrics/events where warranted for risky changes
 
 ## What NOT to do
-- Don’t restate the diff back to the user.
-- Don’t bikeshed style if RuboCop/Prettier would handle it.
-- Don’t propose abstractions for one-off code.
-- Don’t drown the user in nits if there are blockers.
-- Don’t claim something is “slow” without pointing to a likely mechanism or asking for evidence (query plan, benchmark, prod metric).
+- Don't restate the diff back to the user.
+- Don't bikeshed style if RuboCop/Prettier would handle it.
+- Don't propose abstractions for one-off code.
+- Don't drown the user in nits if there are blockers.
+- Don't claim something is "slow" without pointing to a likely mechanism or asking for evidence (query plan, benchmark, prod metric).
 
 ## Output format (strict)
 
@@ -108,7 +108,7 @@ If the PR is not in a local branch and you cannot access Github MCP, stop early 
 - ...
 
 ### Tests
-- <what’s missing / what looks good>
+- <what's missing / what looks good>
 - <commands to run, if relevant>
 
 ### Verdict
@@ -117,7 +117,7 @@ If the PR is not in a local branch and you cannot access Github MCP, stop early 
 Omit empty sections.
 
 ## Stop conditions
-- Diff > 1000 lines: ask to scope down, or do a sampling-based review and explicitly say it’s sampling-based.
+- Diff > 1000 lines: ask to scope down, or do a sampling-based review and explicitly say it's sampling-based.
 - Generated/vendored files: skip and note them.
 - Missing diff/base: ask once for PR number/link or base branch, then proceed when provided.
 - Performance claims need evidence — flag suspected hot paths, but don't assert "this is slow" without a query plan, benchmark, or production signal to point at.

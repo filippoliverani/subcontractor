@@ -29,12 +29,9 @@ git status && git log --oneline -5 && git branch --show-current
 
 ## Commits
 
-Imperative subject, max 72 chars, no trailing period. Body explains WHY.
+For authoring commit messages, load the `git-commit` skill.
 
 ```bash
-# amend most recent message
-git commit --amend -m "new message"
-
 # amend most recent commit, keep message, add staged files
 git add <file> && git commit --amend --no-edit
 ```

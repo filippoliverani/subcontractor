@@ -16,12 +16,6 @@ Never push a change unless explicitly instructed to.
 
 ## General Principles
 
-Always apply Kent Beck's rules of simple design when planning or applying any code change:
-1. Passes the tests
-2. Reveals intention
-3. No duplication
-4. Fewest elements
-
 Don't ever change the formatting of existing files unless explicitly requested by the user.
 I want code diffs to be as small as possible to double-check them quickly.
 
@@ -65,7 +59,6 @@ I want code diffs to be as small as possible to double-check them quickly.
 - Don't use magic values or magic strings. Extract to named constants.
 - Don't suppress linter warnings without explaining why.
 - Don't generate placeholder or stub implementations without clearly marking them as incomplete.
-- Don't "improve" working code you weren't asked to touch.
 
 ## Execution Rules
 
