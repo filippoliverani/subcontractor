@@ -42,12 +42,6 @@
     },
     "compaction": {
       "model": "github-copilot/gpt-5-mini"
-    },
-    "review": {
-      "model": "github-copilot/claude-sonnet-4.6"
-    },
-    "write": {
-      "model": "github-copilot/gpt-5-mini"
     }
   },
   "formatter": {
@@ -64,11 +58,11 @@
         ".rake"
       ]
     },
-    "erb-formatter": {
+    "erb-lint": {
       "command": [
         "bundle",
         "exec",
-        "erb-formatter",
+        "erb-lint",
         "$FILE",
         "--write"
       ],
@@ -119,9 +113,10 @@
   },
   "permission": {
     "external_directory": {
+      "*": "ask",
+      "/tmp/**": "allow",
       "~/.subcontractor/**": "allow",
-      "/opt/homebrew/lib/ruby/gems/**" : "allow",
-      "*": "ask"
+      "/opt/homebrew/lib/ruby/gems/**": "allow"
     },
     "bash": {
       "*": "ask",
@@ -143,19 +138,25 @@
       "read *": "allow",
       "sed *": "allow",
       "date *": "allow",
+      "fd *": "allow",
+      "tr *": "allow",
+      "uniq *": "allow",
       "mkdir *": "allow",
       "gem show *": "allow",
-      "bundle install *": "allow",
-      "bundle show *": "allow",
-      "bundle exec rspec *": "allow",
-      "bundle exec rubocop *": "allow",
-      "bundle exec rails *": "allow",
-      "bin/rails *": "allow",
-      "bin/rake *": "allow",
-      "bin/rspec *": "allow",
-      "bin/rubocop *": "allow",
-      "yarn build *": "allow",
-      "yarn install *": "allow",
+      "python3 *": "allow",
+      "timeout *": "allow",
+      "*bundle install *": "allow",
+      "*bundle show *": "allow",
+      "*bundle exec rspec *": "allow",
+      "*bundle exec rubocop *": "allow",
+      "*bundle exec rails *": "allow",
+      "*bundle open *": "allow",
+      "*bin/rails *": "allow",
+      "*bin/rake *": "allow",
+      "*bin/rspec *": "allow",
+      "*bin/rubocop *": "allow",
+      "*npm build *": "allow",
+      "*npm install *": "allow",
       "gh *": "allow",
       "gh *delete*": "deny",
       "git *": "allow",
@@ -176,7 +177,7 @@
         ".ru",
         ".html.erb"
       ]
-    },
+    }
   },
   "snapshot": true,
   "compaction": {
@@ -187,7 +188,12 @@
   "mcp": {
     "context7": {
       "type": "local",
-      "command": ["npx", "-y", "@upstash/context7-mcp@latest"]
+      "command": [
+        "npx",
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ],
+      "enabled": false
     },
     "rails": {
       "type": "local",
@@ -208,7 +214,7 @@
       "headers": {
         "Authorization": "Bearer {env:GITHUB_PERSONAL_ACCESS_TOKEN}"
       },
-      "enabled": true
+      "enabled": false
     },
     "jira": {
       "type": "remote",
@@ -230,7 +236,11 @@
     },
     "heroku": {
       "type": "local",
-      "command": ["npx", "-y", "@heroku/mcp-server"],
+      "command": [
+        "npx",
+        "-y",
+        "@heroku/mcp-server"
+      ],
       "environment": {
         "HEROKU_API_KEY": "{env:HEROKU_API_KEY}"
       },

@@ -1,6 +1,7 @@
 ---
 description: Writes commits, PR description and messages in general
 mode: primary
+model: github-copilot/gpt-5-mini
 temperature: 0.1
 permission:
   edit: deny
